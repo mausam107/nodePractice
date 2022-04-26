@@ -27,4 +27,4 @@ app.use(shopRoutes);
 
 app.use(errorcontroller.get404);
 
-app.listen(3000, console.log("connected!"));
+app.listen(3000, console.log("This is now connected!"));
