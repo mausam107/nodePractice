@@ -1,6 +1,5 @@
 const Product =require('../models/product');
 
-
 exports.getProducts=(req, res, next) => {
     Product.fetchAll((products)=>{
       res.render('shop/product-list', {
@@ -37,7 +36,6 @@ exports.getOrders=(req,res,next)=>{
     pageTitle:'Your Orders'
   });
 };
-
 
 exports.getCheckout=(req,res,next)=>{
   res.render('shop/checkout',{
