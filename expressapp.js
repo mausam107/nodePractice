@@ -1,9 +1,8 @@
 const path = require("path");
-const http = require("http");
 
 const express = require("express");
 
-const rootdir = require("./utill/path");
+const rootdir = require("./util/path");
 
 const errorcontroller= require('./controllers/error')
 
@@ -21,7 +20,7 @@ app.set("views", "views");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(adminRoutes);
+app.use("/admin",adminRoutes);
 
 app.use(shopRoutes);
 
