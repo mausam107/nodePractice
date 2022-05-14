@@ -113,26 +113,46 @@ exports.getReset = (req, res, next) => {
   });
 };
 
+
 exports.postReset = (req, res, next) => {
   crypto.randomBytes(32, (err, buffer) => {
     if (err) {
       console.log(err);
-      return res.redirect("/reset");
+      return res.redirect('/reset');
     }
-    const email = req.body.email;
-    const token = buffer.toString("hex");
-    User.findOne({ email: email })
-      .then((user) => {
+    const token = buffer.toString('hex');
+    User.findOne({ email: req.body.email })
+      .then(user => {
         if (!user) {
-          req.flash("error", "No account with that email found.");
-          return res.redirect("/reset");
+          req.flash('error', 'No account with that email found.');
+          return res.redirect('/reset');
         }
-        user.resetToken=token;
-        user.resetTokenExpiration=Date.now()+360000;
+        user.resetToken = token;
+        user.resetTokenExpiration = Date.now() + 3600000;
         return user.save();
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   });
-};
+}
+exports.getNewPassword=(req,res,next)=>{
+  const token=req.params.token;
+  User.findOne({resetToken:token,resetTokenExpiration:{$gt:Date.now()}}).then(user=>{
+    let message = req.flash("error");
+    if (message[0] == "No account with that email found.") {
+      message = message[0];
+    } else {
+      message = null;
+    }
+    res.render("auth/new-password", {
+      path: "/new-password",
+      pageTitle: "New Password",
+      errorMessage: message,
+      userId:user._id.toString(),
+    });
+  })
+  .catch(err=>{
+    console.log(err);
+  })
+}
