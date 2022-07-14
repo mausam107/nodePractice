@@ -228,6 +228,26 @@ form {
   text-align: center;
 }
 
+.Pagination{
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.Pagination a{
+  text-align: none;
+  color:#00695c ;
+  padding: 0.5rem;
+  border: 1px solid #00695c;
+  margin: 0 1rem;
+}
+
+.Pagination a:hover,
+.Pagination a:active,
+.Pagination a.active{
+  background: #00695c;
+  color: white;
+}
+
 .user-message-error {
   border-color: red;
   background: rgb(234, 185, 185);

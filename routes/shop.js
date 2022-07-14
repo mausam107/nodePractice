@@ -15,14 +15,16 @@ router.get('/products', shopController.getProducts);
 
 router.get('/products/:productId',shopController.getProduct);
 
-router.get('/cart',isAut, shopController.getCart);
+router.get('/cart', shopController.getCart);
 
-router.post('/cart',isAut, shopController.postCart);
+router.post('/cart', shopController.postCart);
 
-router.post('/cart-delete-item',isAut, shopController.postCartDeleteProduct);
+router.post('/cart-delete-item', shopController.postCartDeleteProduct);
 
-router.post('/create-order',isAut, shopController.postOrder);
+router.post('/create-order', shopController.postOrder);
 
-router.get('/orders',isAut, shopController.getOrders);
+router.get('/orders', shopController.getOrders);
+
+router.get('/orders/:orderId', shopController.getInvoice);
 
 module.exports = router;
